@@ -1,27 +1,23 @@
-import { useState } from 'react'
-import { useGetPokemonByNameQuery } from './services/pokemon'
+import { Route, Routes } from 'react-router-dom'
+import { authProtectedRoutes, publicRoutes } from '@/routes'
+import AppRoute from '@/routes/route'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const { data, error  , isLoading } = useGetPokemonByNameQuery('pikachu'   )
-
-   const HELLO =    1;
-  const hello_world =   2;
-
-     return (
-    <div className='bg-amber-700'>
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
-        <>
-          <h3>{data.species.name}</h3>
-          <img src={data.sprites.front_shiny} alt={data.species.name} />
-        </>
-      ) : null}
-    </div>
+  return (
+    <Routes>
+      <Route>
+        {publicRoutes.map((route, idx) => (
+          <Route key={idx} path={route.path} element={<AppRoute isAuthProtected={false} />}>
+            <Route path={route.path} element={<route.component />} />
+          </Route>
+        ))}
+        {authProtectedRoutes.map((route, idx) => (
+          <Route key={idx} path={route.path} element={<AppRoute isAuthProtected={true} />}>
+            <Route path={route.path} element={<route.component />} />
+          </Route>
+        ))}
+      </Route>
+    </Routes>
   )
 }
 
