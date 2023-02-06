@@ -4,14 +4,32 @@ import Page404 from '@/pages/_Static/Page404'
 import { Navigate } from 'react-router-dom'
 import Logout from '@/pages/Auth/Logout'
 
-const authProtectedRoutes = [
-  { path: '/dashboard', component: Dashboard },
+interface Route {
+  path: string
+  component: any
+  name?: string
+}
+interface RoutesMap {
+  [key: string]: string
+}
+
+const authProtectedRoutes: Route[] = [
+  { path: '/dashboard', component: Dashboard, name: 'dashboard' },
   { path: '/', component: () => <Navigate to='/dashboard' /> },
   { path: '*', component: Page404 },
 ]
-const publicRoutes = [
-  { path: '/login', component: Login },
-  { path: '/logout', component: Logout },
+const publicRoutes: Route[] = [
+  { path: '/login', component: Login, name: 'login' },
+  { path: '/logout', component: Logout, name: 'logout' },
 ]
 
-export { authProtectedRoutes, publicRoutes }
+const routes = [...authProtectedRoutes, ...publicRoutes]
+  .filter((route) => !!route.name && !!route.path)
+  .reduce((acc, route) => {
+    if (route.name) {
+      acc[route.name] = route.path
+    }
+    return acc
+  }, {} as RoutesMap)
+
+export { authProtectedRoutes, publicRoutes, routes }

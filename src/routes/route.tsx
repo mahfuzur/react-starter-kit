@@ -1,22 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Outlet, Navigate } from 'react-router-dom'
+import { routes } from '@/routes/index'
 
-const AppRoute = ({ isAuthProtected }) => {
-  if (isAuthProtected && !localStorage.getItem('token')) return <Navigate to='/login' />
+interface AppRouteProps {
+  isAuthProtected?: boolean
+  layout?: any
+}
+const AppRoute: React.FC<AppRouteProps> = ({ isAuthProtected, layout: Layout }) => {
+  if (isAuthProtected && !localStorage.getItem('token')) return <Navigate to={routes.login} />
 
   return (
-    <div className={'border-4 border-amber-900'}>
+    <Layout>
       <Outlet />
-    </div>
+    </Layout>
   )
 }
 
 AppRoute.propTypes = {
   isAuthProtected: PropTypes.bool,
-  component: PropTypes.any,
-  location: PropTypes.object,
-  layout: PropTypes.any,
 }
 
 export default AppRoute
