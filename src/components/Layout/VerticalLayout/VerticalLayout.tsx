@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { routes } from '@/routes'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Logo from '@/components/Logo'
 interface VerticalLayoutProps {
   children: React.ReactNode
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: <i></i>, current: true },
-  { name: 'Settings', href: '#', icon: <i></i>, current: false },
+  { name: 'Dashboard', href: routes.dashboard, icon: <i></i>, current: true },
+  { name: 'Settings', href: routes.settings, icon: <i></i>, current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -71,18 +71,20 @@ const VerticalLayout: React.FC<VerticalLayoutProps> = ({ children }) => {
                     </div>
                     <nav className='mt-5 space-y-1 px-2'>
                       {navigation.map((item) => (
-                        <a
+                        <NavLink
                           key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                            'group flex items-center px-2 py-2 text-base font-medium rounded-md',
-                          )}
+                          to={item.href}
+                          className={({ isActive }) =>
+                            classNames(
+                              isActive
+                                ? 'bg-secondary text-gray-900 font-bold'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                              'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
+                            )
+                          }
                         >
                           {item.name}
-                        </a>
+                        </NavLink>
                       ))}
                     </nav>
                   </div>
@@ -126,18 +128,20 @@ const VerticalLayout: React.FC<VerticalLayoutProps> = ({ children }) => {
               </div>
               <nav className='mt-5 flex-1 space-y-1 bg-white px-4'>
                 {navigation.map((item) => (
-                  <a
+                  <NavLink
                     key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? 'bg-secondary text-gray-900 font-bold'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
-                    )}
+                    to={item.href}
+                    className={({ isActive }) =>
+                      classNames(
+                        isActive
+                          ? 'bg-secondary text-gray-900 font-bold'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
+                      )
+                    }
                   >
                     {item.name}
-                  </a>
+                  </NavLink>
                 ))}
               </nav>
             </div>

@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { routes } from '@/routes'
+import React from 'react'
 
 function Dashboard() {
   return <h1 className=''>Dashboard</h1>

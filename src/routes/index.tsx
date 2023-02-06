@@ -3,6 +3,7 @@ import Login from '@/pages/Auth/Login'
 import Page404 from '@/pages/_Static/Page404'
 import { Navigate } from 'react-router-dom'
 import Logout from '@/pages/Auth/Logout'
+import Settings from '@/pages/Settings'
 
 interface Route {
   path: string
@@ -15,6 +16,7 @@ interface RoutesMap {
 
 const authProtectedRoutes: Route[] = [
   { path: '/dashboard', component: Dashboard, name: 'dashboard' },
+  { path: '/settings', component: Settings, name: 'settings' },
   { path: '/', component: () => <Navigate to='/dashboard' /> },
   { path: '*', component: Page404 },
 ]
