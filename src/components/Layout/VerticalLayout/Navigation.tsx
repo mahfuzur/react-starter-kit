@@ -1,9 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { routes } from '@/routes'
+import { HomeIcon, WrenchScrewdriverIcon } from '@heroicons/react/24/outline'
 const navigation = [
-  { name: 'Dashboard', href: routes.dashboard, icon: <i></i>, current: true },
-  { name: 'Settings', href: routes.settings, icon: <i></i>, current: false },
+  { name: 'Dashboard', href: routes.dashboard, icon: HomeIcon },
+  { name: 'Settings', href: routes.settings, icon: WrenchScrewdriverIcon },
 ]
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -24,7 +25,18 @@ const Navigation: React.FC = () => {
             )
           }
         >
-          {item.name}
+          {({ isActive }) => (
+            <>
+              <item.icon
+                className={classNames(
+                  isActive ? 'text-gray-900' : 'text-gray-600 group-hover:text-gray-900',
+                  'mr-4 flex-shrink-0 h-6 w-6',
+                )}
+                aria-hidden='true'
+              />
+              {item.name}
+            </>
+          )}
         </NavLink>
       ))}
     </>

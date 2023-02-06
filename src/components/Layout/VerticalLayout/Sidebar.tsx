@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
             </div>
             <div className='ml-3'>
               <p className='text-md font-medium text-gray-900 group-hover:text-gray-900 font-bold'>
-                Tom Cook
+                Mahfuzur Rahman
               </p>
               <Link
                 to={routes.logout}
