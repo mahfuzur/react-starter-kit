@@ -4,10 +4,11 @@ import Page404 from '@/pages/_Static/Page404'
 import { Navigate } from 'react-router-dom'
 import Logout from '@/pages/Auth/Logout'
 import Settings from '@/pages/Settings'
+import React from 'react'
 
 interface Route {
   path: string
-  component: any
+  component: React.FC
   name?: string
 }
 interface RoutesMap {

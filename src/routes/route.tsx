@@ -5,7 +5,7 @@ import { routes } from '@/routes/index'
 
 interface AppRouteProps {
   isAuthProtected?: boolean
-  layout?: any
+  layout: React.FC<{ children: React.ReactNode }>
 }
 const AppRoute: React.FC<AppRouteProps> = ({ isAuthProtected, layout: Layout }) => {
   if (isAuthProtected && !localStorage.getItem('token')) return <Navigate to={routes.login} />
